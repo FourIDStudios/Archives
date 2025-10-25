@@ -1,0 +1,34 @@
+{
+  "name": "discord-archive-system",
+  "version": "1.0.0",
+  "description": "Discord message archive system with React frontend and Discord bot",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "bot",
+    "shared"
+  ],
+  "scripts": {
+    "install-all": "npm install && npm run install:frontend && npm run install:backend && npm run install:bot && npm run install:shared",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install", 
+    "install:bot": "cd bot && npm install",
+    "install:shared": "cd shared && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:bot\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:bot": "cd bot && npm run dev",
+    "build": "npm run build:shared && npm run build:frontend && npm run build:backend && npm run build:bot",
+    "build:shared": "cd shared && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build", 
+    "build:bot": "cd bot && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
