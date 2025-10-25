@@ -311,19 +311,17 @@ This project is open source and available under the **MIT License**.
 
 ## 🎉 Getting Started
 
+If You've followed the setup steps above
 Your Discord Archive System is ready to use! Here's your action plan:
 
 ### Immediate Steps
 1. **🤖 Test the Bot**: Use `/archive` in your Discord server
 2. **🎨 Explore the UI**: Visit http://localhost:3000 and browse messages
 3. **🔍 Try Filtering**: Use the server/channel dropdowns to filter messages
-4. **📱 Test Responsive**: Check the interface on different screen sizes
 
 ### Customization Ideas  
 - **🎨 Styling**: Modify SCSS variables in `frontend/src/styles/main.scss`
 - **🤖 Bot Features**: Add new slash commands in `bot/src/commands/`
-- **📊 Analytics**: Add message statistics and charts
-- **🔐 Auth**: Implement user accounts and permissions
 
 ### Need Help?
 - Check **BOT_SETUP.md** for detailed Discord setup
