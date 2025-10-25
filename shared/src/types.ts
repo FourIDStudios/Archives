@@ -17,6 +17,9 @@ export interface ArchivedMessage {
   archived: boolean;
   archivedAt: Date;
   archivedBy: string;
+  archivedByUsername?: string;
+  archivedByDisplayName?: string;
+  archivedByAvatar?: string;
   messageUrl: string;
 }
 

@@ -58,6 +58,21 @@ export async function archiveMessage(request: ArchiveRequest): Promise<ApiRespon
 }
 
 async function transformMessageToArchive(message: Message, archivedBy: string): Promise<Partial<ArchivedMessage>> {
+  // Fetch the archiver's user info
+  let archivedByUsername: string | undefined;
+  let archivedByDisplayName: string | undefined;
+  let archivedByAvatar: string | undefined;
+
+  try {
+    const archiverUser = await message.client.users.fetch(archivedBy);
+    archivedByUsername = archiverUser.username;
+    archivedByDisplayName = archiverUser.displayName || archiverUser.globalName || undefined;
+    archivedByAvatar = archiverUser.displayAvatarURL();
+  } catch (error) {
+    console.warn('Failed to fetch archiver user info:', error);
+    // Continue without archiver info if fetch fails
+  }
+
   return {
     messageId: message.id,
     channelId: message.channelId,
@@ -117,6 +132,9 @@ async function transformMessageToArchive(message: Message, archivedBy: string): 
     archived: true,
     archivedAt: new Date(),
     archivedBy,
+    archivedByUsername,
+    archivedByDisplayName,
+    archivedByAvatar,
     messageUrl: generateMessageUrl(message.guildId || '', message.channelId, message.id)
   };
 }
