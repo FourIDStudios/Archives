@@ -102,7 +102,7 @@ async function handleArchiveCommand(interaction: ChatInputCommandInteraction) {
         console.log('🗑️ Deleted "caught in 4K" GIF');
         
         if (result.success) {
-          const archiveUrl = `${process.env.FRONTEND_URL || 'http://localhost:3001'}/messages/${result.data?.id}`;
+          const archiveUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/messages/${result.data?.id}`;
           if ('send' in channel) {
             await channel.send({
               content: `📚 **Message added to The Archives!**\n🔗 [View in Archive](${archiveUrl})`
