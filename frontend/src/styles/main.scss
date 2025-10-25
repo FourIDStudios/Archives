@@ -257,28 +257,27 @@ h6 { font-size: 1rem; font-weight: 500; }
 
 // Header Component - Material Design
 .app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 16px;
+
+  height: max-content;
   background: $color-surface-elevated;
   box-shadow: $elevation-2;
   position: static;
-  
-  &__content {
-    @include flex-between;
-    padding: $spacing-lg 0;
-    min-height: 60px;
-  }
-  
+
   &__logo {
-    flex-shrink: 0;
-  }
-  
-  &__nav {
-    display: flex;
     align-items: center;
-    gap: $spacing-lg;
+    justify-content: center;
+    text-align: center;
+    flex:1;
   }
   
   &__status {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-sm $spacing-md;
@@ -286,6 +285,11 @@ h6 { font-size: 1rem; font-weight: 500; }
     border-radius: $border-radius;
     border: 1px solid $color-border;
   }
+}
+
+// Header Text
+.logo__text{
+  font-size: 2.5rem;
 }
 
 // Status Indicator
@@ -337,13 +341,23 @@ h6 { font-size: 1rem; font-weight: 500; }
 
 // Three-Column Layout - Material Design
 .archive-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr 240px;
+  display: flex;
   gap: 16px; // Material 16dp spacing
   height: calc(100vh - 100px); // Account for header height + padding
   max-height: calc(100vh - 100px);
   padding: 16px;
   background: $color-background;
+
+  .message-stream{
+    flex-grow: 1;
+  }
+
+  .SideContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
   
   @media (max-width: 1200px) {
     grid-template-columns: 240px 1fr 200px;
@@ -366,7 +380,7 @@ h6 { font-size: 1rem; font-weight: 500; }
   background: $color-surface;
   border-radius: 8px; // Material corner radius
   padding: 16px;
-  height: fit-content;
+  height:max-content;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
   box-shadow: $elevation-1;
