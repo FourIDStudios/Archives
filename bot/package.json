@@ -4,6 +4,7 @@
   "description": "Discord bot for archiving messages",
   "main": "dist/index.js",
   "scripts": {
+    "prebuild": "cd ../shared && npm install && npm run build",
     "build": "tsc",
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
