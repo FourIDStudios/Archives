@@ -380,7 +380,7 @@ h6 { font-size: 1rem; font-weight: 500; }
   background: $color-surface;
   border-radius: 8px; // Material corner radius
   padding: 16px;
-  height:max-content;
+  height: max-content;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
   box-shadow: $elevation-1;
