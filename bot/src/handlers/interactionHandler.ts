@@ -68,7 +68,7 @@ async function handleArchiveCommand(interaction: ChatInputCommandInteraction) {
       targetMessageId = lastMessage.id;
     }
 
-    // Get the channel to post the GIF in
+    // Get the channel and check if target message exists
     const channel = await interaction.client.channels.fetch(targetChannelId!);
     if (!channel || !channel.isTextBased() || !('send' in channel)) {
       await interaction.editReply({
@@ -77,11 +77,29 @@ async function handleArchiveCommand(interaction: ChatInputCommandInteraction) {
       return;
     }
 
+    // Try to fetch the target message to see if it still exists
+    let targetMessage = null;
+    try {
+      targetMessage = await channel.messages.fetch(targetMessageId);
+      console.log('✅ Target message found, will reply to it');
+    } catch (error) {
+      console.log('⚠️ Target message not found or not accessible, will post new message');
+    }
+
     // Post the "caught in 4K" GIF first
     console.log('📷 Posting "caught in 4K" GIF...');
-    const gifMessage = await channel.send({
-      content: 'https://tenor.com/view/4k-caught-caught-in4k-caught-in8k-8k-gif-20014426'
-    });
+    let gifMessage;
+    if (targetMessage) {
+      // Reply to the target message with the GIF
+      gifMessage = await targetMessage.reply({
+        content: 'https://tenor.com/view/4k-caught-caught-in4k-caught-in8k-8k-gif-20014426'
+      });
+    } else {
+      // Post as a new message in the channel
+      gifMessage = await channel.send({
+        content: 'https://tenor.com/view/4k-caught-caught-in4k-caught-in8k-8k-gif-20014426'
+      });
+    }
 
     // Archive the message
     console.log('📤 Archiving message:', targetMessageId, 'from channel:', targetChannelId);
@@ -103,16 +121,33 @@ async function handleArchiveCommand(interaction: ChatInputCommandInteraction) {
         
         if (result.success) {
           const archiveUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/messages/${result.data?.id}`;
-          if ('send' in channel) {
-            await channel.send({
+          
+          if (targetMessage) {
+            // Reply to the original message with archive notification
+            await targetMessage.reply({
               content: `📚 **Message added to The Archives!**\n🔗 [View in Archive](${archiveUrl})`
             });
+          } else {
+            // Post as new message if original message not found
+            if ('send' in channel) {
+              await channel.send({
+                content: `📚 **Message added to The Archives!**\n🔗 [View in Archive](${archiveUrl})`
+              });
+            }
           }
         } else {
-          if ('send' in channel) {
-            await channel.send({
+          if (targetMessage) {
+            // Reply to the original message with error
+            await targetMessage.reply({
               content: `❌ Failed to archive message: ${result.error}`
             });
+          } else {
+            // Post as new message if original message not found
+            if ('send' in channel) {
+              await channel.send({
+                content: `❌ Failed to archive message: ${result.error}`
+              });
+            }
           }
         }
       } catch (error) {
@@ -122,6 +157,7 @@ async function handleArchiveCommand(interaction: ChatInputCommandInteraction) {
 
     // Respond to the interaction
     if (result.success) {
+      
       await interaction.editReply({
         content: `✅ Message archived successfully! Check the channel for the notification.`
       });

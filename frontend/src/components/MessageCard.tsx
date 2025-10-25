@@ -266,8 +266,29 @@ export const MessageCard: React.FC<MessageCardProps> = ({ message, onDelete, onV
             </a>
           </div>
         </div>
-        <div className="text--xs text--gray-400">
-          Archived {formatTimestamp(message.archivedAt)}
+        <div className="message-card__footer-right">
+          <div className="message-card__archived-by">
+            <span className="text--xs text--gray-400">Archived by:</span>
+            <div className="message-card__archived-by-user">
+              {message.archivedByAvatar ? (
+                <img 
+                  src={message.archivedByAvatar} 
+                  alt={message.archivedByUsername || 'Unknown User'}
+                  className="message-card__archived-by-avatar"
+                />
+              ) : (
+                <div className="message-card__archived-by-placeholder">
+                  <User className="w--3 h--3" />
+                </div>
+              )}
+              <span className="text--xs text--gray-300">
+                {message.archivedByDisplayName || message.archivedByUsername || `User ${message.archivedBy}`}
+              </span>
+            </div>
+          </div>
+          <div className="text--xs text--gray-400">
+            {formatTimestamp(message.archivedAt)}
+          </div>
         </div>
       </div>
     </div>

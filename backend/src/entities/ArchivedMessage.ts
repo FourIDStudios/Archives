@@ -54,6 +54,15 @@ export class ArchivedMessage implements IArchivedMessage {
   @Column('varchar', { length: 255 })
   archivedBy!: string;
 
+  @Column('varchar', { length: 255, nullable: true })
+  archivedByUsername?: string;
+
+  @Column('varchar', { length: 255, nullable: true })
+  archivedByDisplayName?: string;
+
+  @Column('varchar', { length: 500, nullable: true })
+  archivedByAvatar?: string;
+
   @Column('varchar', { length: 500 })
   messageUrl!: string;
 

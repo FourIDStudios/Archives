@@ -156,11 +156,6 @@ export const MessagesPage: React.FC = () => {
     <>
       <Header />
       <div className="archive-layout">
-        <FilterSidebar 
-          filters={filters}
-          onFiltersChange={handleFiltersChange}
-        />
-        
         <MessageStream 
           messages={messagesData?.data || []}
           currentPage={messagesData?.pagination?.page || 1}
@@ -172,12 +167,18 @@ export const MessagesPage: React.FC = () => {
           onDeleteMessage={handleDeleteMessage}
           onViewDetails={handleViewDetails}
         />
-        
+        <div className='SideContent'>
         <UserList 
           users={users}
           selectedUserId={selectedUserId}
           onUserSelect={handleUserSelect}
         />
+        <FilterSidebar 
+          filters={filters}
+          onFiltersChange={handleFiltersChange}
+        />
+        </div>
+        
       </div>
     </>
   );

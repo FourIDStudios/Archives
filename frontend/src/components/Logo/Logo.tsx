@@ -84,7 +84,6 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
       {showText && (
         <span 
           className="logo__text" 
-          style={{ fontSize: dimensions.text }}
         >
           THE ARCHIVES
         </span>
