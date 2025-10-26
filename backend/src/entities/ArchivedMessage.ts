@@ -30,10 +30,10 @@ export class ArchivedMessage implements IArchivedMessage {
   @Column('text')
   content!: string;
 
-  @Column('datetime')
+  @Column()
   timestamp!: Date;
 
-  @Column('datetime', { nullable: true })
+  @Column({ nullable: true })
   editedTimestamp?: Date;
 
   @Column('json')
@@ -48,7 +48,7 @@ export class ArchivedMessage implements IArchivedMessage {
   @Column('boolean', { default: true })
   archived!: boolean;
 
-  @Column('datetime')
+  @Column()
   archivedAt!: Date;
 
   @Column('varchar', { length: 255 })

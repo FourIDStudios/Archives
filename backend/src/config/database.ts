@@ -34,6 +34,12 @@ export const AppDataSource = new DataSource(
 export async function initializeDatabase() {
   try {
     console.log('🔗 Initializing database...');
+    console.log('Environment info:', {
+      NODE_ENV: process.env.NODE_ENV || 'NOT SET',
+      DATABASE_URL: process.env.DATABASE_URL ? 'SET' : 'NOT SET',
+      RAILWAY_ENVIRONMENT: process.env.RAILWAY_ENVIRONMENT || 'NOT SET',
+      RAILWAY_PROJECT: process.env.RAILWAY_PROJECT || 'NOT SET'
+    });
     console.log('Database config:', {
       type: AppDataSource.options.type,
       database: AppDataSource.options.type === 'sqlite' ? (AppDataSource.options as any).database : 'PostgreSQL',
