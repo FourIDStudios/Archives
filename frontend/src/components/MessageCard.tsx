@@ -97,16 +97,10 @@ function renderMediaContent(mediaUrls: Array<{url: string, type: string}>) {
 
 interface MessageCardProps {
   message: ArchivedMessage;
-  onDelete?: (messageId: string) => void;
   onViewDetails?: (messageId: string) => void;
 }
 
-export const MessageCard: React.FC<MessageCardProps> = ({ message, onDelete, onViewDetails }) => {
-  const handleDelete = () => {
-    if (onDelete && confirm('Are you sure you want to delete this archived message?')) {
-      onDelete(message.id);
-    }
-  };
+export const MessageCard: React.FC<MessageCardProps> = ({ message, onViewDetails }) => {
 
   return (
     <div className="message-card">
@@ -139,15 +133,6 @@ export const MessageCard: React.FC<MessageCardProps> = ({ message, onDelete, onV
           >
             <ExternalLink className="w--4 h--4" />
           </button>
-          {onDelete && (
-            <button
-              onClick={handleDelete}
-              className="btn btn--ghost btn--sm text--error"
-              title="Delete Message"
-            >
-              <Trash2 className="w--4 h--4" />
-            </button>
-          )}
         </div>
       </div>
 
