@@ -21,8 +21,9 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "rimraf": "^5.0.5"
+    "typescript": "^5.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "rimraf": "^5.0.5"
+  }
 }
