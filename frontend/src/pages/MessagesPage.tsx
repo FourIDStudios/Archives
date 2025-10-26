@@ -20,8 +20,6 @@ export const MessagesPage: React.FC = () => {
     endDate: ''
   });
 
-  const queryClient = useQueryClient();
-
   // Health check to ensure backend is available
   const { data: healthData } = useQuery({
     queryKey: ['health'],
@@ -44,18 +42,6 @@ export const MessagesPage: React.FC = () => {
     }),
     enabled: !!healthData, // Only run if health check passes
     placeholderData: (previousData) => previousData
-  });
-
-  // Delete message mutation
-  const deleteMessageMutation = useMutation({
-    mutationFn: ApiService.deleteMessage,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['messages'] });
-    },
-    onError: (error) => {
-      console.error('Failed to delete message:', error);
-      alert('Failed to delete message. Please try again.');
-    }
   });
 
   // Reset page when filters change
@@ -98,12 +84,6 @@ export const MessagesPage: React.FC = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-  };
-
-  const handleDeleteMessage = (messageId: string) => {
-    if (confirm('Are you sure you want to delete this archived message?')) {
-      deleteMessageMutation.mutate(messageId);
-    }
   };
 
   const handleViewDetails = (messageId: string) => {
@@ -164,7 +144,6 @@ export const MessagesPage: React.FC = () => {
           isLoading={isLoading}
           error={error}
           onPageChange={handlePageChange}
-          onDeleteMessage={handleDeleteMessage}
           onViewDetails={handleViewDetails}
         />
         <div className='SideContent'>

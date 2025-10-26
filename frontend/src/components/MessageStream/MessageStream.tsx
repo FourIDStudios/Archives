@@ -14,7 +14,6 @@ interface MessageStreamProps {
   isLoading?: boolean;
   error?: Error | null;
   onPageChange: (page: number) => void;
-  onDeleteMessage: (messageId: string) => void;
   onViewDetails: (messageId: string) => void;
   className?: string;
 }
@@ -27,7 +26,6 @@ export const MessageStream: React.FC<MessageStreamProps> = ({
   isLoading = false,
   error = null,
   onPageChange,
-  onDeleteMessage,
   onViewDetails,
   className = ''
 }) => {
@@ -122,7 +120,6 @@ export const MessageStream: React.FC<MessageStreamProps> = ({
             <div key={message.id} className="message-stream__message-wrapper">
               <MessageCard
                 message={message}
-                onDelete={() => onDeleteMessage(message.id)}
                 onViewDetails={() => onViewDetails(message.id)}
               />
             </div>
