@@ -43,7 +43,9 @@ export async function archiveMessage(request: ArchiveRequest): Promise<ApiRespon
 
     // Send to backend API
     const apiUrl = process.env.API_BASE_URL || 'http://localhost:3001';
-    const response = await axios.post(`${apiUrl}/api/messages/archive`, archiveData, {
+    // Ensure URL has protocol
+    const fullApiUrl = apiUrl.startsWith('http') ? apiUrl : `https://${apiUrl}`;
+    const response = await axios.post(`${fullApiUrl}/api/messages/archive`, archiveData, {
       timeout: 5000 // 5 second timeout
     });
 
