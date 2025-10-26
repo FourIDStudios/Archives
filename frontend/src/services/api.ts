@@ -3,8 +3,32 @@ import type { ArchivedMessage, ApiResponse, PaginatedResponse, GetMessagesQuery 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
+// Ensure URL is absolute and properly formatted
+const getAbsoluteApiUrl = (url: string): string => {
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  // If it's a domain without protocol, add https://
+  if (url.includes('.')) {
+    return `https://${url}`;
+  }
+  // Otherwise, it's probably localhost
+  return url;
+};
+
+const finalApiUrl = getAbsoluteApiUrl(API_BASE_URL);
+
+// Debug logging for development
+if (import.meta.env.MODE === 'development') {
+  console.log('🔧 API Configuration:', {
+    VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+    finalApiUrl,
+    mode: import.meta.env.MODE
+  });
+}
+
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: finalApiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
