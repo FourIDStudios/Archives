@@ -6,6 +6,7 @@
   "description": "React TypeScript frontend for Discord Archive System",
   "scripts": {
     "dev": "vite --port 3000",
+    "prebuild": "cd ../shared && npm install && npm run build",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
