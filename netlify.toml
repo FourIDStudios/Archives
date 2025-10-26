@@ -1,9 +1,9 @@
 [build]
   publish = "frontend/dist"
-  command = "npm install && cd frontend && npm install && npm run build"
+  command = "cd frontend && npm install && npm run build"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "20.19.0"
   NPM_VERSION = "10"
 
 [[redirects]]
