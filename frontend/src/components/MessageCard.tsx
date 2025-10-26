@@ -1,7 +1,7 @@
 import React from 'react';
 import { type ArchivedMessage } from '../types';
 import { formatTimestamp, formatFileSize } from '@discord-archive/shared';
-import { Calendar, User, MessageSquare, Paperclip, ExternalLink, Trash2 } from 'lucide-react';
+import { Calendar, User, MessageSquare, Paperclip, ExternalLink} from 'lucide-react';
 
 // Function to detect media URLs in content
 function detectMediaUrls(content: string) {
